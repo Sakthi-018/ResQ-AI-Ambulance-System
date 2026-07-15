@@ -19,7 +19,7 @@ from app.routes.tracking import router as tracking_router
 from app.routes.websocket import router as websocket_router
 
 app = FastAPI(
-    title="AI Ambulance System",
+    title="ResQ",
     version="1.0.0"
 )
 
@@ -104,7 +104,7 @@ Base.metadata.create_all(bind=engine)
 @app.get("/")
 def home():
     return {
-        "message": "AI Ambulance System Backend Running"
+        "message": "ResQ Backend Running"
     }
 
 
