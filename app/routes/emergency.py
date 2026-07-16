@@ -184,43 +184,47 @@ ETA : {eta} Minutes
     # ------------------------
     # Send Email
     # ------------------------
-    await send_email(
-        receiver=user.email,
-        subject="🚑 AI Ambulance System - Emergency Assigned",
-        body=f"""
-        <h2>Emergency Request Confirmed</h2>
+    try:
+        await send_email(
+            receiver=user.email,
+            subject="🚑 AI Ambulance System - Emergency Assigned",
+            body=f"""
+            <h2>Emergency Request Confirmed</h2>
 
-        <p>Hello <b>{user.full_name}</b></p>
+            <p>Hello <b>{user.full_name}</b></p>
 
-        <p>Your emergency request has been accepted.</p>
+            <p>Your emergency request has been accepted.</p>
 
-        <hr>
+            <hr>
 
-        <p><b>Emergency:</b> {emergency.emergency_type}</p>
+            <p><b>Emergency:</b> {emergency.emergency_type}</p>
 
-        <p><b>Pickup:</b> {emergency.pickup_location}</p>
+            <p><b>Pickup:</b> {emergency.pickup_location}</p>
 
-        <p><b>Destination:</b> {emergency.destination}</p>
+            <p><b>Destination:</b> {emergency.destination}</p>
 
-        <p><b>Assigned Ambulance:</b> {ambulance.vehicle_number}</p>
+            <p><b>Assigned Ambulance:</b> {ambulance.vehicle_number}</p>
 
-        <p><b>Hospital:</b> {hospital.name}</p>
+            <p><b>Hospital:</b> {hospital.name}</p>
 
-        <p><b>Ambulance Distance:</b> {ambulance_distance:.2f} KM</p>
+            <p><b>Ambulance Distance:</b> {ambulance_distance:.2f} KM</p>
 
-        <p><b>Hospital Distance:</b> {hospital_distance:.2f} KM</p>
+            <p><b>Hospital Distance:</b> {hospital_distance:.2f} KM</p>
 
-        <p><b>Estimated Arrival Time:</b> {eta} Minutes</p>
+            <p><b>Estimated Arrival Time:</b> {eta} Minutes</p>
 
-        <p><b>Status:</b> Assigned</p>
+            <p><b>Status:</b> Assigned</p>
 
-        <hr>
+            <hr>
 
-        <h3>Your ambulance is on the way.</h3>
+            <h3>Your ambulance is on the way.</h3>
 
-        <p>Thank you for using AI Ambulance System.</p>
-        """
-    )
+            <p>Thank you for using AI Ambulance System.</p>
+            """
+        )
+    except Exception as e:
+        import logging
+        logging.error(f"Failed to send email notification: {e}")
 
     # ------------------------
     # Audit Log
