@@ -20,4 +20,5 @@ uvicorn==0.50.2
 websockets
 passlib[bcrypt]
 bcrypt
-
+python-jose[cryptography]
+cryptography
